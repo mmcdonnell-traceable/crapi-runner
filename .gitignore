@@ -1,1 +1,2 @@
-*.json
+# Auto downloaded attacks.json file in crapi-runner.sh
+attacks.json
