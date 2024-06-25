@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-unset ACCESS_TOKEN
-ACCESS_TOKEN=""
 
 # SECRET_AT_FILE=".access_token"
 
@@ -44,13 +42,21 @@ function main() {
     #   echo ""
     #   TOKEN_SET=1
     # done
-    log_on
+
+    if [ -z "${ACCESS_TOKEN}" ]; then
+      log_on
+    fi;
 
     while [ true ]; do
+      echo "Please Choose an option below!"
       json2choice CHOICE "$(cat ${FILENAME})" '.item[].name'
       prompt_boolean YN "Do you want to run the '${CHOICE}' collection?" "Yes"
       if [ ${YN} == "Y" ]; then
         newman run ${FILENAME} --environment postman_environment.json --folder "${CHOICE}" --insecure
+      fi
+      prompt_boolean CONTINUE "Do you want to run to continue?" "Yes"
+      if [ ${CONTINUE} == "Y" ]; then
+        clear;
       fi
     done
 
