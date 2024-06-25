@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-
-# SECRET_AT_FILE=".access_token"
-
 function main() {
     local SPECFILE="https://gist.githubusercontent.com/saadfarooq07/172cf1cb45a88108f6ce2e0d99f73b44/raw/908556cc7785ad0e90d9bc3d0df3a886c672c759/attacks.json"
     local FILENAME="attacks.json"
@@ -29,19 +26,6 @@ function main() {
 
     echo ""
     echo ""
-
-    # while [ true ]; do
-    # #   if [ ${TOKEN_SET} -ne 0 ]; then
-    # #     clear
-    # #   fi
-    #   echo "Main Menu:"
-    #   json2choice CHOICE "$(cat ${FILENAME})" '.item[].name'
-    #   echo "  Running ${CHOICE}....."
-    #   echo "newman run ${FILENAME} --environment postman_environment.json --folder \"${CHOICE}\" --insecure --delay-request 2000 > /etc/newman/newman-normal.out 2> /etc/newman/newman-normal.err < /dev/null"
-    #   echo ""
-    #   echo ""
-    #   TOKEN_SET=1
-    # done
 
     if [ -z "${ACCESS_TOKEN}" ]; then
       log_on
