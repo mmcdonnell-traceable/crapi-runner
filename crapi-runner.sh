@@ -2,7 +2,7 @@
 
 function main() {
     local SPECFILE="https://gist.githubusercontent.com/saadfarooq07/172cf1cb45a88108f6ce2e0d99f73b44/raw/908556cc7785ad0e90d9bc3d0df3a886c672c759/attacks.json"
-    local FILENAME="attacks.json"
+    local FILENAME="postman_collection-malicious.json"
 
     echo "Welcome to the crAPI Runner!! Please log in with your crAPI Credentials to continue!"
 
