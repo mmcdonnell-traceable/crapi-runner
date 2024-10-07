@@ -35,7 +35,7 @@ function main() {
     while [ 1 ]; do
         for OBJ in $(jq -r -c '.item[].name | select (. != "Signup and setup") | @base64' ${FILENAME}); do
             DECRYPTED=$(echo "${OBJ}" | base64 --decode)
-            newman run ${FILENAME} --environment postman_environment.json --folder "${DECRYPTED}" --insecure
+            newman run ${FILENAME} --environment postman_environment.json --folder "${DECRYPTED}" --env-var token=$(awk '{print $2}' ${SECRET_AT_FILE}) --insecure
         done
         sleep 4;
     done
@@ -53,7 +53,7 @@ function log_on() {
 
   if [ -z "${ACCESS_TOKEN}" ]; then
     if [ -f "${SECRET_AT_FILE}" ]; then
-      local AV_PAYLOAD=$(jq -n --arg token $(cat ${SECRET_AT_FILE} | awk '{print $2}') '{"token":$token}')
+      local AV_PAYLOAD=$(jq -n --arg token $(awk '{print $2}' ${SECRET_AT_FILE}) '{"token":$token}')
       AUTH=$(curl ${AUTH_VAL} -H 'Content-Type: application/json' --data-raw "${AV_PAYLOAD}" --insecure -s | jq '.status')
       if [ "200" == "${AUTH}" ]; then
         ACCESS_TOKEN="${AV_PAYLOAD}"
